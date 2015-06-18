@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Application Controller</title>
+    <link rel="stylesheet" type="text/css" href="./controller.css">
+  </head>
+  <body>
+    <div class="card">
+      <div class="headder">LED Control</div>
+      <div class="center">
+        <button id="white" class="btn" onclick="changeColor('white')" disabled/>white</button><br>
+        <button id="lightBlue" class="btn" onclick="changeColor('lightBlue')" disabled/>light blue</button><br>
+        <button id="blue" class="btn" onclick="changeColor('blue')" disabled/>blue</button><br>
+        <button id="lightGreen" class="btn" onclick="changeColor('lightGreen')" disabled/>light green</button><br>
+        <button id="green" class="btn" onclick="changeColor('green')" disabled/>green</button><br>
+        <button id="red" class="btn" onclick="changeColor('red')" disabled/>red</button><br>
+        <button id="pink" class="btn" onclick="changeColor('pink')" disabled/>pink</button><br>
+        <br>
+        <button id="blink" class="btn" onclick="blinkLED()" disabled/>Blink It!</button><br>
+        <br>
+      </div>
+    </div>
+
+    <script src="http://localhost:{{port}}/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+      // connect to local server
+      var socket = io.connect('http://localhost:{{port}}');
+
+      // socket.ip connections check
+      socket.on('connect', function () {
+        var btn = document.getElementsByClassName("btn");
+        for (var i = 0; i < btn.length; i++) {
+          btn[i].disabled = false;
+        }
+      });
+
+      socket.on('disconnect', function (client) {
+        var btn = document.getElementsByClassName("btn");
+        for (var i = 0; i < btn.length; i++) {
+          btn[i].disabled = true;
+        }
+      });
+
+      socket.on('action', function (data) {
+        if(data.color){
+          var prev = document.getElementsByClassName('selected');
+          for (var i = 0; i < prev.length; i++) {
+            prev[i].className = prev[i].className.replace('selected','')
+          }
+          var el = document.getElementById(data.color)
+          el.className = el.className + " selected";
+        }
+      });
+
+      function changeColor(color) {
+        socket.emit('action', {color:color});
+      }
+      function blinkLED(color) {
+        socket.emit('action', {blink:true});
+      }
+    </script>
+  </body>
+</html>
