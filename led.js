@@ -1,11 +1,4 @@
-var stage = new five.Board();
-stage.on("ready", function() {
-  var light = new five.Relay(1);
-  light.on()
-})
-
-
-var socket = require('socket.io-client')('http://localhost:9030');
+var socket = require('socket.io-client')('http://lightitup.space:5040');
 var five = require("johnny-five");
 var board = new five.Board();
 
