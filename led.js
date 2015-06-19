@@ -109,8 +109,8 @@ board.on("ready", function() {
         turnOff()
       }
     }else{
-      console
       clearInterval(interval)
+      enableBlink();
     }
     colorstate = !colorstate
   }
@@ -118,12 +118,21 @@ board.on("ready", function() {
   function makeItBlink(){
     times = 5;
     interval = setInterval(function(){blink(currentColor)},300)
+    disableBlink();
   }
 
   function random(){
     var name = ['white','lightBlue','blue','lightGreen','green','red','pink']
     var random = Math.floor(Math.random()*7)
     color[name[random]]();
+  }
+
+  function disableBlink(color) {
+    socket.emit('blink', false);
+  }
+
+  function enableBlink(color) {
+    socket.emit('brink', true);
   }
 
   //socket IO setting
@@ -135,7 +144,7 @@ board.on("ready", function() {
       console.log(data.name + ' made LED blink')
       makeItBlink()
     }else{
-      console.log(data.name + ' changed LED color to' + data.color)
+      console.log(data.name + ' changed LED color to ' + data.color)
       color[data.color]();
     }
   });

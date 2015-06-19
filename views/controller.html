@@ -59,6 +59,15 @@
         }
       });
 
+      socket.on('blink', function (state) {
+         var btn = document.getElementById("blink");
+        if(state){
+          btn.disabled = true
+        }else{
+          btn.disabled = false
+        }
+      })
+
       function changeColor(color) {
         socket.emit('action', {name:name, color:color});
       }
