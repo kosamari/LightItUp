@@ -132,10 +132,10 @@ board.on("ready", function() {
   });
   socket.on('action', function(data){
     if(data.blink){
-      console.log(data.name + 'made LED blink')
+      console.log(data.name + ' made LED blink')
       makeItBlink()
     }else{
-      console.log(data.name + 'changed LED color to' + data.color)
+      console.log(data.name + ' changed LED color to' + data.color)
       color[data.color]();
     }
   });
