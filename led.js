@@ -109,8 +109,8 @@ board.on("ready", function() {
         turnOff()
       }
     }else{
-      clearInterval(interval)
       enableBlink();
+      clearInterval(interval)
     }
     colorstate = !colorstate
   }
@@ -128,11 +128,11 @@ board.on("ready", function() {
   }
 
   function disableBlink(color) {
-    socket.emit('blink', false);
+    socket.emit('blink', {state:false});
   }
 
   function enableBlink(color) {
-    socket.emit('brink', true);
+    socket.emit('blink', {state:true});
   }
 
   //socket IO setting
@@ -151,6 +151,7 @@ board.on("ready", function() {
   socket.on('disconnect', function(){
     console.log('Socket Disconnected !')
   });
+
 
   this.repl.inject({
     r1: r1,

@@ -33,35 +33,6 @@
 .selected{
   border: 8px solid yellow;
 }
-#white{
-  background-color: LightGray;
-  color: gray;
-  /*border: 5px solid gray;*/
-}
-#lightBlue{
-  background-color: #00B2F2
-}
-#blue{
-  background-color: #0066FF
-}
-#lightGreen{
-  background-color: #E0FF00
-}
-#green{
-  background-color: #00EE00
-}
-#red{
-  background-color: #FF0006
-}
-#pink{
-  background-color: #FF00CC
-}
-#blink{
-  border: 5px dotted yellow;
-  background-color: white;
-  color:gray;
-}
-
 button{
   width: 150px;
   height:40px;
@@ -70,14 +41,41 @@ button{
   margin-bottom: 5px;
   border:hidden;
 }
-button:hover{
-  background-color:#F35958;
-}
+
 button:disabled{
+  border-color: #A9A9A9;
   background-color:#A9A9A9;
 }
 button:disabled:hover{
   background-color:#A9A9A9;
+}
+
+.white{
+  background-color: LightGray;
+  color: gray;
+}
+.lightBlue{
+  background-color: #00B2F2
+}
+.blue{
+  background-color: #0066FF
+}
+.lightGreen{
+  background-color: #E0FF00
+}
+.green{
+  background-color: #00EE00
+}
+.red{
+  background-color: #FF0006
+}
+.pink{
+  background-color: #FF00CC
+}
+.blink{
+  border: 5px dotted yellow;
+  background-color: white;
+  color:gray;
 }
 
 .center{

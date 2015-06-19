@@ -10,15 +10,15 @@
     <div class="card">
       <div class="headder">LED Control</div>
       <div class="center">
-        <button id="white" class="btn" onclick="changeColor('white')" disabled/>white</button><br>
-        <button id="lightBlue" class="btn" onclick="changeColor('lightBlue')" disabled/>light blue</button><br>
-        <button id="blue" class="btn" onclick="changeColor('blue')" disabled/>blue</button><br>
-        <button id="lightGreen" class="btn" onclick="changeColor('lightGreen')" disabled/>light green</button><br>
-        <button id="green" class="btn" onclick="changeColor('green')" disabled/>green</button><br>
-        <button id="red" class="btn" onclick="changeColor('red')" disabled/>red</button><br>
-        <button id="pink" class="btn" onclick="changeColor('pink')" disabled/>pink</button><br>
+        <button id="white" class="btn white" onclick="changeColor('white')" disabled/>white</button><br>
+        <button id="lightBlue" class="btn lightBlue" onclick="changeColor('lightBlue')" disabled/>light blue</button><br>
+        <button id="blue" class="btn blue" onclick="changeColor('blue')" disabled/>blue</button><br>
+        <button id="lightGreen" class="btn lightGreen" onclick="changeColor('lightGreen')" disabled/>light green</button><br>
+        <button id="green" class="btn green" onclick="changeColor('green')" disabled/>green</button><br>
+        <button id="red" class="btn red" onclick="changeColor('red')" disabled/>red</button><br>
+        <button id="pink" class="btn pink" onclick="changeColor('pink')" disabled/>pink</button><br>
         <br>
-        <button id="blink" class="btn" onclick="blinkLED()" disabled/>Blink It!</button><br>
+        <button id="blink" class="btn blink" onclick="blinkLED()" disabled/>Blink It!</button><br>
         <br>
       </div>
     </div>
@@ -59,12 +59,13 @@
         }
       });
 
-      socket.on('blink', function (state) {
-         var btn = document.getElementById("blink");
-        if(state){
-          btn.disabled = true
-        }else{
+      socket.on('blink', function (data) {
+        var btn = document.getElementById("blink");
+        console.log(data)
+        if(data.state){
           btn.disabled = false
+        }else{
+          btn.disabled = true
         }
       })
 
