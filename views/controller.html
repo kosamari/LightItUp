@@ -25,6 +25,11 @@
 
     <script src="http://lightitup.space:{{port}}/socket.io/socket.io.js"></script>
     <script type="text/javascript">
+      var person = prompt("What's your name?");
+      var name;
+      if (person != null) {
+          name = person;
+      }
       // connect to local server
       var socket = io.connect('http://lightitup.space:{{port}}');
 
@@ -55,10 +60,10 @@
       });
 
       function changeColor(color) {
-        socket.emit('action', {color:color});
+        socket.emit('action', {name:name, color:color});
       }
       function blinkLED(color) {
-        socket.emit('action', {blink:true});
+        socket.emit('action', {name:name, blink:true});
       }
     </script>
   </body>
