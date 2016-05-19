@@ -10,70 +10,26 @@
     <div class="card">
       <div class="headder">LED Control</div>
       <div class="center">
-        <button id="white" class="btn white" onclick="changeColor('white')" disabled/>white</button><br>
-        <button id="lightBlue" class="btn lightBlue" onclick="changeColor('lightBlue')" disabled/>light blue</button><br>
-        <button id="blue" class="btn blue" onclick="changeColor('blue')" disabled/>blue</button><br>
-        <button id="lightGreen" class="btn lightGreen" onclick="changeColor('lightGreen')" disabled/>light green</button><br>
-        <button id="green" class="btn green" onclick="changeColor('green')" disabled/>green</button><br>
-        <button id="red" class="btn red" onclick="changeColor('red')" disabled/>red</button><br>
-        <button id="pink" class="btn pink" onclick="changeColor('pink')" disabled/>pink</button><br>
+        <button id="lightBlue" class="btn lightBlue" onclick="changeColor('#ff0000')"/>light blue</button><br>
+        <button id="blue" class="btn blue" onclick="changeColor('#ffff00')"/>blue</button><br>
+        <button id="orange" class="btn orange" onclick="changeColor('#0000ff')"/>orange</button><br>
+        <button id="green" class="btn green" onclick="changeColor('#ff00ff')"/>green</button><br>
+
+        <button id="red" class="btn red" onclick="changeColor('#00ffff')"/>red</button><br>
+
+        <button id="pink" class="btn pink" onclick="changeColor('#00ff00')"/>pink</button><br>
         <br>
-        <button id="blink" class="btn blink" onclick="blinkLED()" disabled/>Blink It!</button><br>
         <br>
       </div>
     </div>
 
-    <script src="http://lightitup.space:{{port}}/socket.io/socket.io.js"></script>
+    <script src="http://localhost:{{port}}/socket.io/socket.io.js"></script>
     <script type="text/javascript">
-      var person = prompt("What's your name?");
-      var name;
-      if (person != null) {
-          name = person;
-      }
       // connect to local server
-      var socket = io.connect('http://lightitup.space:{{port}}');
-
-      // socket.ip connections check
-      socket.on('connect', function () {
-        var btn = document.getElementsByClassName("btn");
-        for (var i = 0; i < btn.length; i++) {
-          btn[i].disabled = false;
-        }
-      });
-
-      socket.on('disconnect', function (client) {
-        var btn = document.getElementsByClassName("btn");
-        for (var i = 0; i < btn.length; i++) {
-          btn[i].disabled = true;
-        }
-      });
-
-      socket.on('action', function (data) {
-        if(data.color){
-          var prev = document.getElementsByClassName('selected');
-          for (var i = 0; i < prev.length; i++) {
-            prev[i].className = prev[i].className.replace('selected','')
-          }
-          var el = document.getElementById(data.color)
-          el.className = el.className + " selected";
-        }
-      });
-
-      socket.on('blink', function (data) {
-        var btn = document.getElementById("blink");
-        console.log(data)
-        if(data.state){
-          btn.disabled = false
-        }else{
-          btn.disabled = true
-        }
-      })
+      var socket = io.connect('http://localhost:{{port}}');
 
       function changeColor(color) {
-        socket.emit('action', {name:name, color:color});
-      }
-      function blinkLED(color) {
-        socket.emit('action', {name:name, blink:true});
+        socket.emit('action', {color:color});
       }
     </script>
   </body>

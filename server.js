@@ -22,18 +22,7 @@ socket.io
 io.on('connection', function (socket) {
 
   socket.on('action', function(message) {
-    socket.emit('action', message)
     socket.broadcast.emit('action', message);
-  });
-
-  socket.on('blink', function(state) {
-    socket.emit('blink', state)
-    socket.broadcast.emit('blink', state);
-  });
-
-  // on disconnect
-  socket.on('disconnect', function() {
-    socket.broadcast.emit('disconnected');
   });
 
 });
